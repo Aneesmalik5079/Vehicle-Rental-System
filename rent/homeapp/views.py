@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
-from .models import Userprofile,cardetails,bikedetails,rentedcars,rentedbikes,Payments
+from .models import Userprofile,cardetails,bikedetails,rentedcars,rentedbikes
 from django.contrib.auth.decorators import login_required
 from decimal import Decimal
 from uuid import uuid4
@@ -22,6 +22,9 @@ def loginpage(request):
     return render(request,"loginpage.html")
 def updatepasswordpage(request):
     return render(request,"updatepassword.html")
+def paymentsuccess(request):
+    return render(request,"paymentsuccess.html")
+
 
 
 def logout_view(request):

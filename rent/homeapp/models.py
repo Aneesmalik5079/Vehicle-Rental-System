@@ -55,11 +55,3 @@ class rentedbikes(models.Model):
       id_proof = models.ImageField(upload_to='id_proofs/', null=False, blank=False)
       user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
-class Payments(models.Model):
-    payment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  
-    car = models.ForeignKey(cardetails, on_delete=models.CASCADE)  
-    rent_hours = models.ForeignKey(rentedcars, on_delete=models.CASCADE) 
-    amount = models.DecimalField(max_digits=10, decimal_places=2)  
-    payment_date = models.DateTimeField(auto_now_add=True)  
-    

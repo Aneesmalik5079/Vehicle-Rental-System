@@ -23,10 +23,11 @@ urlpatterns = [
     path('carrent/<str:id>/',carrent,name="carrent"),
     path('bikerent/<str:id>/',bikerent,name="bikerent"),
     path('payment',payment,name="payment"),
+    path('paymentsuccess',paymentsuccess,name="paymentsuccess"),
     path('remove_car/<uuid:rent_id>/',remove_car, name='remove_car'),
     path('remove_bike/<uuid:rent_id>/',remove_bike, name='remove_bike'),
     path('update_login',update_login,name="update_login"),
-    path('updatepasswordpage',updatepasswordpage,name="updatepasswordpage"),
+    
     
     
 

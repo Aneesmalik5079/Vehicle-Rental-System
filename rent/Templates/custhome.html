@@ -86,6 +86,35 @@
       height: auto;
     }
 
+    /* Profile Button Styles */
+    .top-left {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 2;
+    }
+
+    .profile-button {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .profile-button:hover {
+      background-color: var(--secondary-color);
+      transform: scale(1.05);
+    }
+
+    .profile-button:active {
+      transform: scale(0.95);
+    }
+
     /* Top-right Controls */
     .top-right {
       position: absolute;
@@ -182,12 +211,16 @@
   </style>
 </head>
 <body>
-  <!-- Customer Home Page -->
+  <!-- Profile Button -->
+  <div class="top-left">
+    <button class="profile-button" onclick="location.href='/update_login';">Profile</button>
+
+  </div>
+
+  <!-- Top-right Controls -->
   <div class="top-right">
     <a href="/customervehiclelist">Show Rentals</a>
-    
-    <a href="{% url 'logout' %}">Logout</a>
-
+    <a href="/loginpage">Logout</a>
   </div>
 
   <div class="container">
@@ -195,9 +228,8 @@
     <div class="logo">
       <img src="https://st2.depositphotos.com/3665639/5579/v/450/depositphotos_55790809-stock-illustration-car-in-hand-icon.jpg" alt="Customer Logo">
     </div>
-    
 
-    <h1>Welcome, {{ user.username }}</h1>
+    <h1>Welcome, {{user.username}}!</h1>
 
     <!-- Options Section -->
     <div class="flex-column">

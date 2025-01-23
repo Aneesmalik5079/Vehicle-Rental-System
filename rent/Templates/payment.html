@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: url('https://wallpaperswide.com/download/good_food-wallpaper-3840x2160.jpg') no-repeat center center fixed;
+            
             background-size: cover;
             font-family: Arial, sans-serif;
         }
@@ -51,12 +51,12 @@
     
     <div class="payment-container">
         <h2 class="payment-title">Select Your Payment Method</h2>
-        <form method="POST">
+        <form method="POST" action="/paymentsuccess">
             {% csrf_token %}
             <div class="mb-3">
                 <label class="form-label">Payment Options</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="paymentOption" id="creditCard" value="    Card" required>
+                    <input class="form-check-input" type="radio" name="paymentOption" id="creditCard" value="credit Card" required>
                     <label class="form-check-label" for="creditCard">Credit Card</label>
                 </div>
                 <div class="form-check">
