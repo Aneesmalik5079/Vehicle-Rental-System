@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Customer Home Page for exploring car and bike rentals.">
+  <title>Customer Home Page</title>
+
+  <style>
+    :root {
+      --primary-color: #6a11cb;
+      --secondary-color: #2575fc;
+      --text-color: #333;
+      --background-overlay: rgba(0, 0, 0, 0.5);
+      --card-bg-color: rgba(255, 255, 255, 0.9);
+      --card-shadow: rgba(0, 0, 0, 0.2);
+      --font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-family);
+      background: url('https://images.unsplash.com/photo-1493238792000-8113da705763?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FyJTIwd2FsbHBhcGVyfGVufDB8fDB8fHww') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background Overlay */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--background-overlay);
+      z-index: 0;
+    }
+
+    .container {
+      background: var(--card-bg-color);
+      color: var(--text-color);
+      width: 600px;
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 12px 35px var(--card-shadow);
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20%);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      text-align: center;
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 100px;
+      height: auto;
+    }
+
+    /* Top-right Controls */
+    .top-right {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 20px;
+      z-index: 2;
+    }
+
+    .top-right a {
+      text-decoration: none;
+      color: var(--primary-color);
+      background: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      border: 2px solid var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .top-right a:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    /* Flex Layout for Cards */
+    .flex-column {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    /* Card Styles */
+    .card {
+      background: #fff;
+      color: var(--text-color);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .card p {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 1rem;
+    }
+
+    .card a {
+      text-decoration: none;
+      background: var(--primary-color);
+      color: #fff;
+      padding: 15px 30px;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .card a:hover {
+      background: var(--secondary-color);
+      transform: scale(1.05);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .card h3 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Customer Home Page -->
+  <div class="top-right">
+    <a href="/customervehiclelist">Show Rentals</a>
+    
+    <a href="{% url 'logout' %}">Logout</a>
+
+  </div>
+
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="https://st2.depositphotos.com/3665639/5579/v/450/depositphotos_55790809-stock-illustration-car-in-hand-icon.jpg" alt="Customer Logo">
+    </div>
+    
+
+    <h1>Welcome, {{ user.username }}</h1>
+
+    <!-- Options Section -->
+    <div class="flex-column">
+      <div class="card">
+        <h3>Search Cars</h3>
+        <p>Find your perfect rental car for any occasion.</p>
+        <a href="/carlist">Search Cars</a>
+      </div>
+
+      <div class="card">
+        <h3>Explore Bikes</h3>
+        <p>Discover a wide variety of bikes to rent.</p>
+        <a href="/bikelist">Explore Bikes</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

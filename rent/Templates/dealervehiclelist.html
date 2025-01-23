@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Fleet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">My Fleet</h1>
+
+        <!-- Cars Section -->
+        <h2 class="mt-4">Cars</h2>
+        <div class="row">
+            {% if cardetails %}
+                {% for item in cardetails %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        {% if item.image %}
+                        <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.carname }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.carname }}</h5>
+                            <p class="card-text">
+                                <strong>Brand:</strong> {{ item.brand }}<br>
+                                <strong>Year:</strong> {{ item.year }}<br>
+                                <strong>Price Per Day:</strong> &#8377;{{ item.price }}<br>
+                                <strong>Fuel Type:</strong> {{ item.fueltype }}<br>
+                                <strong>Rental Status:</strong> {{ item.rental_status }}<br>
+                            </p>
+                            <div class="text-center">
+                                {% if item.rental_status != "Rented" %}
+                                <a href="{% url 'remove_car' item.rent_id %}" class="btn btn-warning custom-hover">Remove</a>
+                                {% else %}
+                                <button class="btn btn-secondary" disabled>Currently Rented</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+            <p class="text-center">You have not added any cars to your fleet.</p>
+            {% endif %}
+        </div>
+
+        <!-- Bikes Section -->
+        <h2 class="mt-4">Bikes</h2>
+        <div class="row">
+            {% if bikedetails %}
+                {% for item in bikedetails %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        {% if item.image %}
+                        <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.bikename }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.bikename }}</h5>
+                            <p class="card-text">
+                                <strong>Brand:</strong> {{ item.brand }}<br>
+                                <strong>Year:</strong> {{ item.year }}<br>
+                                <strong>Price Per Day:</strong> &#8377;{{ item.price }}<br>
+                                <strong>Fuel Type:</strong> {{ item.fueltype }}<br>
+                                <strong>Rental Status:</strong> {{ item.rental_status }}<br>
+                            </p>
+                            <div class="text-center">
+                                {% if item.rental_status != "Rented" %}
+                                <a href="{% url 'remove_bike' item.rent_id %}" class="btn btn-warning custom-hover">Remove</a>
+                                {% else %}
+                                <button class="btn btn-secondary" disabled>Currently Rented</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+            <p class="text-center">You have not added any bikes to your fleet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

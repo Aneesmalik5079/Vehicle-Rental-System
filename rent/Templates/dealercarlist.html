@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Car Details</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://i.pinimg.com/originals/c0/d3/7f/c0d37fa0d6858b6e03df70c55aff6426.jpg'); /* Replace with actual background image URL */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.6); /* More transparency */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 12px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        input, select {
+            margin-top: 8px;
+            padding: 14px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Image preview section */
+        .image-preview {
+            margin-top: 15px;
+            display: none;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Car Details</h1>
+        <form action="{% url 'add_car' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Car Name -->
+            <label for="carname">Car Name</label>
+            <input type="text" id="carname" name="carname" placeholder="Enter car name" required>
+
+            <!-- Brand -->
+            <label for="brand">Brand</label>
+            <input type="text" id="brand" name="brand" placeholder="Enter car brand" required>
+
+            <!-- Year of Manufacture -->
+            <label for="year">Year of Manufacture</label>
+            <input type="number" id="year" name="year" placeholder="Enter year" min="1900" max="2025" required>
+
+            <!-- Price per Day -->
+            <label for="price">Price Per Day (in INR)</label>
+            <input type="number" id="price" name="price" placeholder="Enter price per day" required>
+
+            <!-- Fuel Type -->
+            <label for="fueltype">Fuel Type</label>
+            <select id="fueltype" name="fueltype" required>
+                <option value="">Select fuel type</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
+                <option value="Hybrid">Hybrid</option>
+            </select>
+
+            <!-- Transmission Type -->
+            <label for="transmissiontype">Transmission Type</label>
+            <select id="transmissiontype" name="transmissiontype">
+                <option value="">Select transmission</option>
+                <option value="Manual">Manual</option>
+                <option value="Automatic">Automatic</option>
+            </select>
+
+            <!-- Upload Car Image -->
+            <label for="image">Upload Car Image</label>
+            <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)" required>
+            
+            <!-- Image Preview Section -->
+            <div class="image-preview" id="image-preview">
+                <img id="preview-img" src="" alt="Car Image Preview">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Add Car</button>
+        </form>
+    </div>
+
+    <script>
+        // Image preview functionality
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('preview-img');
+            const previewContainer = document.getElementById('image-preview');
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function () {
+                    preview.src = reader.result;
+                    previewContainer.style.display = 'block';
+                }
+
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full height */
+            background: url('https://mkrentacar.com/public/uploads/blog/nmi7ylntn1.jpg') no-repeat center center/cover;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* Overlay for container */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+        }
+
+        /* Container Styling */
+        .container {
+            max-width: 400px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.6); /* More transparent white */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Elevated shadow */
+            text-align: center;
+            position: relative; /* For overlay positioning */
+            animation: fadeIn 1.2s ease-in-out; /* Smooth fade-in effect */
+        }
+
+        /* Logo Styling */
+        .container img {
+            max-width: 100px; /* Logo size */
+            margin-bottom: 20px; /* Space below the image */
+            animation: bounce 2s infinite; /* Subtle bouncing effect */
+        }
+
+        /* Heading Styling */
+        .container h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Label Styling */
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        /* Input Fields */
+        input {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #6a11cb;
+            box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+        }
+
+        /* Button Styling */
+        button {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #5a0eaa, #1a5ddb);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Forgot Password Link Styling */
+        .forgot-password {
+            margin-top: 15px;
+        }
+
+        .forgot-password a {
+            color: #2575fc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #1a5ddb;
+            text-decoration: underline;
+        }
+
+        /* Error Message Styling */
+        .error {
+            color: red;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 400px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .container h2 {
+                font-size: 1.5rem;
+            }
+
+            input {
+                padding: 10px;
+            }
+
+            button {
+                font-size: 0.9rem;
+                padding: 12px;
+            }
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo Bounce Animation */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div> <!-- Overlay for darkening background -->
+
+    <div class="container">
+        <!-- Logo Image -->
+        <img src="https://st2.depositphotos.com/3665639/5579/v/450/depositphotos_55790809-stock-illustration-car-in-hand-icon.jpg" alt="Logo">
+
+        <!-- Heading -->
+        <h2>Login</h2>
+
+        <!-- Form -->
+        <form method="post" action="{% url 'login_user' %}">
+            {% csrf_token %}
+            
+            <!-- Display Error Messages -->
+            {% for message in messages %}
+                <p class="error">{{ message }}</p>
+            {% endfor %}
+
+            <!-- Username Input -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+            <!-- Password Input -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <!-- Submit Button -->
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Forgot Password Link -->
+        <div class="forgot-password">
+            <a href="/update_login">Forgot Password?</a>
+        </div>
+    </div>
+</body>
+</html>

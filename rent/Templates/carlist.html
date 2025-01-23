@@ -1,0 +1,209 @@
+car list
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details - Rent a Car</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Body styling */
+        body {
+            background: url('https://images.unsplash.com/opengraph/1x1.png?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&blend=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1517672651691-24622a91b550%3Fcrop%3Dfaces%252Cedges%26h%3D630%26w%3D1200%26blend%3D000000%26blend-mode%3Dnormal%26blend-alpha%3D10%26mark-w%3D750%26mark-align%3Dmiddle%252Ccenter%26mark%3Dhttps%253A%252F%252Fimages.unsplash.com%252Fopengraph%252Fsearch-input.png%253Fw%253D750%2526h%253D84%2526txt%253Dcar%252Band%252Bbike%2526txt-pad%253D80%2526txt-align%253Dmiddle%25252Cleft%2526txt-color%253D%252523000000%2526txt-size%253D40%2526txt-width%253D660%2526txt-clip%253Dellipsis%2526auto%253Dformat%2526fit%253Dcrop%2526q%253D60%26auto%3Dformat%26fit%3Dcrop%26q%3D60%26ixid%3DM3wxMjA3fDB8MXxzZWFyY2h8NHx8Y2FyJTIwYW5kJTIwYmlrZXxlbnwwfHx8fDE3Mzc0MTM0MzJ8MA%26ixlib%3Drb-4.0.3&blend-w=1&auto=format&fit=crop&q=60') center/cover no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            color: white;
+            font-family: 'Poppins', Arial, sans-serif;
+            height: 100vh;
+        }
+
+        /* Container styling */
+        .container {
+            margin-top: 50px;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Heading Box Styling */
+        .heading-box {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+        }
+
+        .heading-box h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        .row {
+            margin-top: 30px;
+        }
+
+        /* Card styling */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-img-top:hover {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #20c997;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .btn-rent {
+            background-color: #20c997;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: 500;
+        }
+
+        .btn-rent:hover {
+            background-color: #17a589;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .text-center {
+            color: #fff;
+        }
+
+        .no-cars {
+            color: white;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 40px;
+        }
+
+        /* Gradient overlay for the images */
+        .card-img-top {
+            position: relative;
+            z-index: 0;
+        }
+
+        .card-img-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .card-body {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .heading-box h1 {
+                font-size: 2rem;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+
+            .card-text {
+                font-size: 0.9rem;
+            }
+
+            .btn-rent {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+
+        /* Add a font icon for Rent button */
+        .fa-car {
+            margin-right: 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if cardetails %}
+        <div class="heading-box">
+            <h1>Available Cars for Rent</h1>
+        </div>
+        <div class="row">
+            {% for item in cardetails %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.carname }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.carname }}</h5>
+                        <p class="card-text">
+                            <strong>Brand:</strong> {{ item.brand }}<br>
+                            <strong>Year:</strong> {{ item.year }}<br>
+                            <strong>Price Per Day:</strong> &#8377;{{ item.price }}<br>
+                            <strong>Fuel Type:</strong> {{ item.fueltype }}
+                        </p>
+                        <a href="{% url 'carrent' item.rent_id %}" class="btn btn-rent">
+                            <i class="fa fa-car"></i> Rent Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="no-cars">No cars available to display.</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- FontAwesome icons -->
+</body>
+</html>

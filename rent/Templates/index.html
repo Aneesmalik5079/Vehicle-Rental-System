@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to RideEase</title>
+    
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('https://images.hdqwalls.com/wallpapers/bmw-f80-4k-0s.jpg') no-repeat center center/cover;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* Container Styling */
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.7); /* More transparent white background */
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Elevated shadow effect */
+            max-width: 400px;
+            width: 90%;
+            animation: fadeIn 1s ease-in-out; /* Smooth fade-in animation */
+            position: relative;
+        }
+
+        /* Heading Styling */
+        .welcome-heading {
+            font-size: 3.5rem; /* Bigger size for the main heading */
+            font-weight: 700;
+            color: #4c6ef5; /* Primary blue color */
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Quote Styling */
+        .quote {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #333;
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif; /* Elegant serif font for quotes */
+        }
+
+        /* Button Wrapper */
+        .button-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 15px;
+        }
+
+        /* Button Styling */
+        .button {
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(90deg, #4c6ef5, #6c63ff); /* Gradient button */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Button shadow */
+        }
+
+        .button:hover {
+            background: linear-gradient(90deg, #3b5bdb, #5145cd);
+            transform: translateY(-3px); /* Lifts the button on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 400px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .welcome-heading {
+                font-size: 2.5rem;
+            }
+
+            .quote {
+                font-size: 1.2rem;
+            }
+
+            .button {
+                font-size: 0.9rem;
+                padding: 12px;
+            }
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="welcome-heading">Welcome</h1>
+        <p class="quote">Your Trusted Vehicle Rental Service</p>
+
+        <div class="button-wrapper">
+            <a href="{% url 'loginpage' %}" class="button">Login</a>
+            <a href="{% url 'registerpage' %}" class="button">Register</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Bike Details</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('https://wallpapercat.com/w/full/5/2/6/607835-3840x2160-desktop-4k-sports-bike-wallpaper.jpg') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000; /* Set text color to black */
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.5); /* More transparent white background */
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Softer shadow for depth */
+            backdrop-filter: blur(10px); /* Optional blur effect */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333; /* Darker text for better readability */
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333; /* Dark text for labels */
+            font-size: 1rem;
+        }
+
+        input, select, button {
+            padding: 14px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="file"] {
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus, button:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .image-preview {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            object-fit: cover;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Add Bike Details</h1>
+        <form action="{% url 'add_bike' %}" method="POST" enctype="multipart/form-data" id="bikeForm">
+            {% csrf_token %}
+
+            <!-- Bike Name -->
+            <label for="bikename">Bike Name</label>
+            <input type="text" id="bikename" name="bikename" placeholder="Enter bike name" required>
+
+            <!-- Brand -->
+            <label for="brand">Brand</label>
+            <input type="text" id="brand" name="brand" placeholder="Enter brand name" required>
+
+            <!-- Year of Manufacture -->
+            <label for="year">Year of Manufacture</label>
+            <input type="number" id="year" name="year" placeholder="Enter year" min="1900" max="2025" required>
+
+            <!-- Price Per Day -->
+            <label for="price">Price Per Day (in INR)</label>
+            <input type="number" id="price" name="price" placeholder="Enter price per day" required>
+
+            <!-- Fuel Type -->
+            <label for="fueltype">Fuel Type</label>
+            <select id="fueltype" name="fueltype" required>
+                <option value="">Select fuel type</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Electric">Electric</option>
+                <option value="Hybrid">Hybrid</option>
+            </select>
+
+            <!-- Upload Bike Image -->
+            <label for="image">Upload Bike Image</label>
+            <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)" required>
+            <!-- Image Preview -->
+            
+
+            <button type="submit">Add Bike</button>
+        </form>
+    </div>
+
+    <script>
+        // Image Preview Function
+        function previewImage(event) {
+            const preview = document.getElementById('imagePreview');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    preview.innerHTML = <img src="${reader.result}" alt="Bike Image Preview">;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.innerHTML = <p>No image selected</p>;
+            }
+        }
+
+        // Form Validation Function
+        document.getElementById('bikeForm').addEventListener('submit', function(event) {
+            const price = document.getElementById('price').value;
+            if (price <= 0) {
+                alert("Price must be a positive number.");
+                event.preventDefault();
+            }
+
+            const image = document.getElementById('image').files[0];
+            if (!image) {
+                alert("Please upload an image.");
+                event.preventDefault();
+            }
+        });
+    </script>
+
+</body>
+</html>
